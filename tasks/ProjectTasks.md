@@ -2,16 +2,18 @@
 
 > Canonical task list. Agents may only modify their own `owner/status/notes` fields.
 
-<!-- Milestone M1 — Editor Core MVP -->
 - TASK: Setup Phaser 3.90 project & stage
-  owner: OPEN
-  status: TODO
+  owner: Gemini CLI
+  status: REVIEW
   notes: feature: F-001 — Editor Canvas Core; roles: Frontend Dev
+PR #1 opened
 
 - TASK: Selection + drag move + snap-to-grid
-  owner: OPEN
-  status: TODO
+  owner: Gemini CLI
+  status: REVIEW
   notes: feature: F-002 — Drag, Drop, Resize, Rotate; depends_on: Setup Phaser 3.90 project & stage; roles: Frontend Dev
+Auto-picked
+PR #2 opened
 
 - TASK: Layers panel + grouping via Containers
   owner: OPEN
@@ -24,6 +26,7 @@
   notes: feature: F-004 — Properties Panel; depends_on: Layers panel + grouping via Containers; roles: Frontend Dev
 
 <!-- Milestone M2 — Assets, Text & Panels -->
+
 - TASK: Asset Manager (images/atlases) + drag to canvas
   owner: OPEN
   status: TODO
@@ -40,6 +43,7 @@
   notes: feature: F-007 — Panels (Nine-slice); depends_on: Asset Manager (images/atlases) + drag to canvas; roles: Frontend Dev
 
 <!-- Milestone M3 — Export / Import / Themes -->
+
 - TASK: Custom HUD JSON schema + exporter (placeholders)
   owner: OPEN
   status: TODO
@@ -56,6 +60,7 @@
   notes: feature: F-008 — Color & Theme; depends_on: Properties panel (x/y/size/angle/alpha/anchor); roles: Frontend Dev, Designer
 
 <!-- Milestone M4 — Runtime & Preview -->
+
 - TASK: Runtime Loader for Phaser 3.90 (loadHUD)
   owner: OPEN
   status: TODO
@@ -67,6 +72,7 @@
   notes: feature: F-012 — Preview & Validation; depends_on: Runtime Loader for Phaser 3.90 (loadHUD), Color & Theme system; roles: Frontend Dev, QA
 
 <!-- Milestone M5 — Polish, Templates & Docs -->
+
 - TASK: Starter HUD templates (Score, Health, MiniMap frame)
   owner: OPEN
   status: TODO
@@ -76,4 +82,3 @@
   owner: OPEN
   status: TODO
   notes: feature: F-011 — Runtime Loader for Phaser 3.90; depends_on: Runtime Loader for Phaser 3.90 (loadHUD); roles: Tech Writer, Frontend Dev, Backend Dev
-
