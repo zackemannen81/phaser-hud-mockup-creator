@@ -1,0 +1,238 @@
+project:
+  name: "Phaser3.90_GameHUD-MockupCreator"
+  slug: "phaser-hud-mockup-creator"
+  vision: "Visual editor to design and export Phaser 3.90 HUD layouts with drag & drop, resizing, styling, assets, and a custom JSON schema using {variable} placeholders."
+  supervisor: "Gemini CLI"
+
+product_spec:
+  summary: "A complete HUD Editor for Phaser 3.90 with an intuitive GUI. Drag & drop UI elements, resize/align, color & theme controls, load images and fonts, and export/import a custom JSON HUD format that uses {extern_variable} placeholders for runtime binding in Phaser games."
+  objectives:
+    - "Make HUD layouting WYSIWYG with grid, guides, and snapping."
+    - "Support Text, BitmapText, Images, Panels (9-slice) and Groups."
+    - "Provide a custom JSON HUD schema with {variable} tags for runtime binding."
+    - "Ship a small Runtime Loader that builds the HUD in a Phaser 3.90 Scene."
+    - "Offer asset and font management plus theming."
+  users:
+    - name: "Game Developer"
+      needs:
+        - "Fast iteration on HUD without hard-coding coordinates"
+        - "Deterministic export for VCS and CI"
+    - name: "UI/UX Designer"
+      needs:
+        - "Drag-and-drop layout, alignment guides, color & typography control"
+        - "Asset previews and theme switching"
+    - name: "Technical Artist"
+      needs:
+        - "Nine-slice panels and layered compositions"
+        - "Custom widgets and extension points"
+  features:
+    - id: F-001
+      title: "Editor Canvas Core"
+      description: "Phaser-driven canvas with pan/zoom, ruler/grid, snapping and selection marquee."
+      acceptance:
+        - "Zoom & pan the stage, toggle grid & snap"
+        - "Select single/multiple elements and move with drag"
+      dependencies: []
+      roles: ["Frontend Dev"]
+
+    - id: F-002
+      title: "Drag, Drop, Resize, Rotate"
+      description: "Interactive transform handles for move/resize/rotate; drop zones to add elements."
+      acceptance:
+        - "Drag to move; handles for resize/rotate"
+        - "Drop palette items onto canvas to create elements"
+      dependencies: ["F-001"]
+      roles: ["Frontend Dev"]
+
+    - id: F-003
+      title: "Layers & Grouping"
+      description: "Layer panel with z-ordering; group elements with Containers."
+      acceptance:
+        - "Reorder z via layer list; group/ungroup selection"
+        - "Hide/lock layers; multi-select operations"
+      dependencies: ["F-001"]
+      roles: ["Frontend Dev"]
+
+    - id: F-004
+      title: "Properties Panel"
+      description: "Edit x/y, width/height, angle, alpha, origin/anchor, visibility, interactivity."
+      acceptance:
+        - "Two-way binding between selection and property fields"
+        - "Numeric nudge via keyboard; reset to defaults"
+      dependencies: ["F-002","F-003"]
+      roles: ["Frontend Dev"]
+
+    - id: F-005
+      title: "Text Support (WebFont + BitmapText)"
+      description: "Create Text/BitmapText nodes; manage fonts (web fonts, bitmap fonts)."
+      acceptance:
+        - "Load and apply web fonts to Text"
+        - "Load bitmap font (png + xml/json) and add BitmapText"
+      dependencies: ["F-004"]
+      roles: ["Frontend Dev"]
+
+    - id: F-006
+      title: "Image & Atlas Support"
+      description: "Load images/atlases into an Asset Manager; drag to canvas as Image/Sprite."
+      acceptance:
+        - "Import PNG/JPG; show thumbnails; place on canvas"
+        - "Replace source keeps transforms/styles"
+      dependencies: ["F-004"]
+      roles: ["Frontend Dev"]
+
+    - id: F-007
+      title: "Panels (Nine-slice)"
+      description: "Resizable panels using 9-slice for crisp corners."
+      acceptance:
+        - "Create panel from texture; resize preserves corners"
+        - "Toggle stretch modes; set padding"
+      dependencies: ["F-006"]
+      roles: ["Frontend Dev"]
+
+    - id: F-008
+      title: "Color & Theme"
+      description: "Color picker for fill/stroke/shadow; save named themes and apply."
+      acceptance:
+        - "Change colors live; switch theme updates all bound nodes"
+        - "Export/import themes with the project"
+      dependencies: ["F-004"]
+      roles: ["Frontend Dev","Designer"]
+
+    - id: F-009
+      title: "Custom HUD Schema & Exporter"
+      description: "Export to JSON with element tree, transforms, styles, and {variable} placeholders."
+      acceptance:
+        - "Export JSON file with version & schema"
+        - "Placeholders like {player_health} preserved in text/props"
+      dependencies: ["F-004","F-005","F-006","F-007","F-008"]
+      roles: ["Backend Dev","Frontend Dev"]
+
+    - id: F-010
+      title: "Importer & Versioning"
+      description: "Load project JSON, migrate minor schema versions."
+      acceptance:
+        - "Recreate scene from JSON; warn on missing assets"
+        - "Version field handled; non-breaking migrations"
+      dependencies: ["F-009"]
+      roles: ["Backend Dev"]
+
+    - id: F-011
+      title: "Runtime Loader for Phaser 3.90"
+      description: "Small JS module that builds HUD from exported JSON at runtime and binds {variables}."
+      acceptance:
+        - "API: loadHUD(scene, hudJson, bindings)"
+        - "Supports Text/BitmapText/Image/Nine-slice/Containers"
+      dependencies: ["F-009","F-010"]
+      roles: ["Backend Dev"]
+
+    - id: F-012
+      title: "Preview & Validation"
+      description: "Live preview inside the Editor; validate missing fonts/assets/placeholders."
+      acceptance:
+        - "Preview uses same rendering path as runtime"
+        - "Validation panel lists issues with links to fix"
+      dependencies: ["F-005","F-006","F-007","F-011"]
+      roles: ["Frontend Dev","QA"]
+
+assets:
+  media:
+    - id: A-ICON-512
+      type: "image"
+      description: "App icon 512x512 PNG"
+      owner_role: "Designer"
+    - id: A-UI-PACK
+      type: "image"
+      description: "Sample UI sprites (buttons, frames) for demos"
+      owner_role: "Designer"
+  models: []
+  cad: []
+
+infrastructure:
+  hosting:
+    provider: "Static SPA (Vite)"
+    notes: "Runs in browser; optional Electron wrapper later."
+  backend:
+    need_backend: false
+    api_integrations: []
+  database:
+    need_db: false
+    engine: ""
+    notes: ""
+
+roadmap:
+  milestones:
+    - id: M1
+      title: "Editor Core MVP"
+      tasks:
+        - title: "Setup Phaser 3.90 project & stage"
+          feature: "F-001"
+          depends_on: []
+          roles: ["Frontend Dev"]
+        - title: "Selection + drag move + snap-to-grid"
+          feature: "F-002"
+          depends_on: ["Setup Phaser 3.90 project & stage"]
+          roles: ["Frontend Dev"]
+        - title: "Layers panel + grouping via Containers"
+          feature: "F-003"
+          depends_on: ["Selection + drag move + snap-to-grid"]
+          roles: ["Frontend Dev"]
+        - title: "Properties panel (x/y/size/angle/alpha/anchor)"
+          feature: "F-004"
+          depends_on: ["Layers panel + grouping via Containers"]
+          roles: ["Frontend Dev"]
+
+    - id: M2
+      title: "Assets, Text & Panels"
+      tasks:
+        - title: "Asset Manager (images/atlases) + drag to canvas"
+          feature: "F-006"
+          depends_on: ["Properties panel (x/y/size/angle/alpha/anchor)"]
+          roles: ["Frontend Dev"]
+        - title: "WebFont + BitmapText support"
+          feature: "F-005"
+          depends_on: ["Properties panel (x/y/size/angle/alpha/anchor)"]
+          roles: ["Frontend Dev"]
+        - title: "Nine-slice Panels"
+          feature: "F-007"
+          depends_on: ["Asset Manager (images/atlases) + drag to canvas"]
+          roles: ["Frontend Dev"]
+
+    - id: M3
+      title: "Export / Import / Themes"
+      tasks:
+        - title: "Custom HUD JSON schema + exporter (placeholders)"
+          feature: "F-009"
+          depends_on: ["WebFont + BitmapText support","Asset Manager (images/atlases) + drag to canvas","Nine-slice Panels"]
+          roles: ["Backend Dev","Frontend Dev"]
+        - title: "Importer + minor schema migrations"
+          feature: "F-010"
+          depends_on: ["Custom HUD JSON schema + exporter (placeholders)"]
+          roles: ["Backend Dev"]
+        - title: "Color & Theme system"
+          feature: "F-008"
+          depends_on: ["Properties panel (x/y/size/angle/alpha/anchor)"]
+          roles: ["Frontend Dev","Designer"]
+
+    - id: M4
+      title: "Runtime & Preview"
+      tasks:
+        - title: "Runtime Loader for Phaser 3.90 (loadHUD)"
+          feature: "F-011"
+          depends_on: ["Importer + minor schema migrations"]
+          roles: ["Backend Dev"]
+        - title: "In-editor Live Preview & Validator"
+          feature: "F-012"
+          depends_on: ["Runtime Loader for Phaser 3.90 (loadHUD)","Color & Theme system"]
+          roles: ["Frontend Dev","QA"]
+
+    - id: M5
+      title: "Polish, Templates & Docs"
+      tasks:
+        - title: "Starter HUD templates (Score, Health, MiniMap frame)"
+          feature: "F-009"
+          depends_on: ["In-editor Live Preview & Validator"]
+          roles: ["Designer","Frontend Dev"]
+        - title: "Docs: Editor User Guide + Runtime API"
+          feature: "F-011"
+          depends_on: ["Runtime Loader for Phaser 3.90 (loadHUD)"]
+          roles: ["Tech Writer","Frontend Dev","Backend Dev"]

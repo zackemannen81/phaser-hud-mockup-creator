@@ -1,0 +1,59 @@
+name: Repo Checks
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ main ]
+  pull_request:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+      - name: Validate presence
+        run: |
+          test -f journal/DeveloperJournal.md
+          test -f tasks/ProjectTasks.md
+          test -f docs/ProjectInformation.md
+      - name: Validate tasks format
+        run: |
+          python3 - <<'PY'
+          import re, sys
+          txt = open('tasks/ProjectTasks.md','r',encoding='utf-8').read()
+          blocks = re.findall(r"- TASK:\s*(.+?)\n\s*owner:\s*(.+?)\n\s*status:\s*(.+?)\n\s*notes:\s*(.*?)(?:\n\n|$)", txt, flags=re.S)
+          if not blocks: print("No task blocks found"); sys.exit(1)
+          valid = {'TODO','IN_PROGRESS','REVIEW','DONE','BLOCKED','NEEDS_INFO','FAILED'}
+          for title, owner, status, notes in blocks:
+            if status.strip() not in valid: print("Invalid status:", status); sys.exit(3)
+          print("Tasks OK")
+          PY
+      - name: Validate mandatory notices acknowledged
+        run: |
+          python3 - <<'PY'
+          import re, sys
+          txt = open('docs/ProjectInformation.md','r',encoding='utf-8').read()
+          notices = re.findall(r"- (NOTICE-\d{4}-\d{2}-\d{2}):\s*\".*?\"\s*\n\s*- Effective: .*?\n\s*- Mandatory: (Yes|No)\s*\n\s*- Action Required.*?\n\s*- Acknowledged by:\s*\n(.*?)(?:\n\n|$)", txt, flags=re.S)
+          ok = True
+          for nid, mand, ack in notices:
+            if mand == 'Yes':
+              lines = [l.strip() for l in ack.strip().splitlines() if l.strip().startswith('-')]
+              if not lines: print("Mandatory notice %s has no acknowledgments" % nid); ok=False
+          if not ok: sys.exit(4)
+          print("Notices OK")
+          PY
+      - name: Forbid tasks/journal changes in PRs (except ops/*)
+        if: github.event_name == 'pull_request' && !startsWith(github.head_ref, 'ops/')
+        run: |
+          set -e
+          git fetch origin ${{ github.base_ref }} --depth=1
+          changed=$(git diff --name-only origin/${{ github.base_ref }}...HEAD | grep -E '^(tasks/|journal/)' || true)
+          if [ -n "$changed" ]; then
+            echo "❌ Task/Journal files changed in PR. Commit such updates on main (or use ops/*)."
+            echo "$changed"
+            exit 1
+          fi
+          echo "✅ No task/journal changes in this PR."
