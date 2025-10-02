@@ -6,7 +6,6 @@
   owner: Gemini CLI
   status: IN_PROGRESS
   notes: feature: F-001 — Editor Canvas Core; roles: Frontend Dev
-Auto-picked
 
 - TASK: Selection + drag move + snap-to-grid
   owner: OPEN
