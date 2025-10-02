@@ -1,7 +1,8 @@
 # ProjectTasks
 
 > Canonical task list. Agents may only modify their own `owner/status/notes` fields.
-
+> 
+<!-- Milestone M1 — Editor Core MVP -->
 - TASK: Setup Phaser 3.90 project & stage
   owner: Gemini CLI
   feature/gemini_cli/setup-phaser-3-90-project-stage
