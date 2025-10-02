@@ -4,6 +4,7 @@
 
 - TASK: Setup Phaser 3.90 project & stage
   owner: Gemini CLI
+  feature/gemini_cli/setup-phaser-3-90-project-stage
   status: REVIEW
   notes: feature: F-001 — Editor Canvas Core; roles: Frontend Dev
 PR #1 opened
