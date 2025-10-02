@@ -4,13 +4,17 @@
 
 - TASK: Setup Phaser 3.90 project & stage
   owner: Gemini CLI
-  status: IN_PROGRESS
+  feature/gemini_cli/setup-phaser-3-90-project-stage
+  status: REVIEW
   notes: feature: F-001 — Editor Canvas Core; roles: Frontend Dev
+PR #1 opened
 
 - TASK: Selection + drag move + snap-to-grid
-  owner: OPEN
-  status: TODO
+  owner: Gemini CLI
+  status: REVIEW
   notes: feature: F-002 — Drag, Drop, Resize, Rotate; depends_on: Setup Phaser 3.90 project & stage; roles: Frontend Dev
+Auto-picked
+PR #2 opened
 
 - TASK: Layers panel + grouping via Containers
   owner: OPEN
@@ -79,4 +83,3 @@
   owner: OPEN
   status: TODO
   notes: feature: F-011 — Runtime Loader for Phaser 3.90; depends_on: Runtime Loader for Phaser 3.90 (loadHUD); roles: Tech Writer, Frontend Dev, Backend Dev
-
