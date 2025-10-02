@@ -1,6 +1,6 @@
 # Base Agent Prompt (All LLM Coding Agents)
 
-You are **Gemini CLI** working in this repository. Your job is to autonomously pick, implement, and ship development tasks while strictly following the team's workflow.
+You are **{AGENT_NAME}** working in this repository. Your job is to autonomously pick, implement, and ship development tasks while strictly following the team's workflow.
 
 ## Golden Rules
 1) **Use tools/agent_cli.py** for *all* task lifecycle updates and journaling. These writes go straight to `main` via the special worktree and are committed+published immediately.
@@ -13,14 +13,14 @@ You are **Gemini CLI** working in this repository. Your job is to autonomously p
 ```bash
 set -euo pipefail
 for f in docs/BEST_PRACTICES.md docs/PROJECT_OVERVIEW.md docs/ProjectInformation.md docs/DEVELOPMENT_PLAN.md docs/ROADMAP.md; do [ -f "$f" ] || { echo "Missing $f"; exit 2; }; done
-python3 tools/agent_cli.py ack NOTICE-2025-10-03 --agent "Gemini CLI" || echo "Already ACKed?"
+python3 tools/agent_cli.py ack NOTICE-2025-10-03 --agent "{AGENT_NAME}" || echo "Already ACKed?"
 ```
 
 ## Main loop (exact)
 ```bash
 # 1) Pick and identify
-python3 tools/agent_cli.py pick --agent "Gemini CLI" --notes "Auto-picked" || { echo "No OPEN tasks"; exit 0; }
-TITLE="$(python3 tools/agent_cli.py current --agent 'Gemini CLI')"
+python3 tools/agent_cli.py pick --agent "{AGENT_NAME}" --notes "Auto-picked" || { echo "No OPEN tasks"; exit 0; }
+TITLE="$(python3 tools/agent_cli.py current --agent '{AGENT_NAME}')"
 test -n "$TITLE" || { echo "No current task"; exit 3; }
 
 # 2) PLAN: locate acceptance in roadmap/plan (grep is fine)
@@ -29,7 +29,7 @@ grep -n "$TITLE" -n docs/DEVELOPMENT_PLAN.md || true
 
 # 3) DO: feature branch
 SLUG="$(echo "$TITLE" | tr '[:upper:]' '[:lower:]' | sed -E 's/[^a-z0-9]+/-/g; s/^-+|-+$//g')"
-ASLUG="gemini_cli"
+ASLUG="{AGENT_SLUG}"
 git switch -c "feature/${ASLUG}/${SLUG}" 2>/dev/null || git checkout -b "feature/${ASLUG}/${SLUG}"
 
 # >>> IMPLEMENT HERE (code, tests, build) <<<
@@ -50,7 +50,7 @@ else
 fi
 
 # 6) Move to REVIEW and prep
-python3 tools/agent_cli.py finish "$TITLE" --agent "Gemini CLI" --status "REVIEW" --notes "$NOTES"
+python3 tools/agent_cli.py finish "$TITLE" --agent "{AGENT_NAME}" --status "REVIEW" --notes "$NOTES"
 git checkout main && git pull --rebase || true
 ```
 
