@@ -1,0 +1,30 @@
+{
+  "name": "phaser-hud-mockup-creator",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "start": "http-server .",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zackemannen81/phaser-hud-mockup-creator.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/zackemannen81/phaser-hud-mockup-creator/issues"
+  },
+  "homepage": "https://github.com/zackemannen81/phaser-hud-mockup-creator#readme",
+  "dependencies": {
+    "phaser": "^3.90.0"
+  },
+  "devDependencies": {
+    "http-server": "^14.1.1"
+  }
+}
