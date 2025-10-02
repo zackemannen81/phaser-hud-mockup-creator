@@ -1,8 +1,9 @@
 # ProjectTasks
 
 > Canonical task list. Agents may only modify their own `owner/status/notes` fields.
-> 
+
 <!-- Milestone M1 — Editor Core MVP -->
+
 - TASK: Setup Phaser 3.90 project & stage
   owner: Gemini CLI
   feature/gemini_cli/setup-phaser-3-90-project-stage
@@ -18,9 +19,10 @@ Auto-picked
 PR #2 opened
 
 - TASK: Layers panel + grouping via Containers
-  owner: OPEN
-  status: TODO
+  owner: Gemini CLI
+  status: IN_PROGRESS
   notes: feature: F-003 — Layers & Grouping; depends_on: Selection + drag move + snap-to-grid; roles: Frontend Dev
+Auto-picked
 
 - TASK: Properties panel (x/y/size/angle/alpha/anchor)
   owner: OPEN
