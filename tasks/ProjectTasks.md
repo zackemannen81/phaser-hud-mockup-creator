@@ -2,81 +2,13 @@
 
 > Canonical task list. Agents may only modify their own `owner/status/notes` fields.
 
-- TASK: Setup Phaser 3.90 project & stage
-  owner: Gemini CLI
-  status: IN_PROGRESS
-  notes: feature: F-001 — Editor Canvas Core; roles: Frontend Dev
+- TASK: Setup Phaser 3.90 project & stage\n  owner: Gemini CLI\n  status: REVIEW\n  notes: feature: F-001 — Editor Canvas Core; roles: Frontend Dev
+PR #1 opened\n\n- TASK: Selection + drag move + snap-to-grid\n  owner: Gemini CLI\n  status: IN_PROGRESS\n  notes: feature: F-002 — Drag, Drop, Resize, Rotate; depends_on: Setup Phaser 3.90 project & stage; roles: Frontend Dev\nAuto-picked\n\n- TASK: Layers panel + grouping via Containers\n  owner: OPEN\n  status: TODO\n  notes: feature: F-003 — Layers & Grouping; depends_on: Selection + drag move + snap-to-grid; roles: Frontend Dev\n\n- TASK: Properties panel (x/y/size/angle/alpha/anchor)\n  owner: OPEN\n  status: TODO\n  notes: feature: F-004 — Properties Panel; depends_on: Layers panel + grouping via Containers; roles: Frontend Dev
 
-- TASK: Selection + drag move + snap-to-grid
-  owner: OPEN
-  status: TODO
-  notes: feature: F-002 — Drag, Drop, Resize, Rotate; depends_on: Setup Phaser 3.90 project & stage; roles: Frontend Dev
+<!-- Milestone M2 — Assets, Text & Panels -->\n\n- TASK: Asset Manager (images/atlases) + drag to canvas\n  owner: OPEN\n  status: TODO\n  notes: feature: F-006 — Image & Atlas Support; depends_on: Properties panel (x/y/size/angle/alpha/anchor); roles: Frontend Dev\n\n- TASK: WebFont + BitmapText support\n  owner: OPEN\n  status: TODO\n  notes: feature: F-005 — Text Support (WebFont + BitmapText); depends_on: Properties panel (x/y/size/angle/alpha/anchor); roles: Frontend Dev\n\n- TASK: Nine-slice Panels\n  owner: OPEN\n  status: TODO\n  notes: feature: F-007 — Panels (Nine-slice); depends_on: Asset Manager (images/atlases) + drag to canvas; roles: Frontend Dev
 
-- TASK: Layers panel + grouping via Containers
-  owner: OPEN
-  status: TODO
-  notes: feature: F-003 — Layers & Grouping; depends_on: Selection + drag move + snap-to-grid; roles: Frontend Dev
+<!-- Milestone M3 — Export / Import / Themes -->\n\n- TASK: Custom HUD JSON schema + exporter (placeholders)\n  owner: OPEN\n  status: TODO\n  notes: feature: F-009 — Custom HUD Schema & Exporter; depends_on: WebFont + BitmapText support, Asset Manager (images/atlases) + drag to canvas, Nine-slice Panels; roles: Backend Dev, Frontend Dev\n\n- TASK: Importer + minor schema migrations\n  owner: OPEN\n  status: TODO\n  notes: feature: F-010 — Importer & Versioning; depends_on: Custom HUD JSON schema + exporter (placeholders); roles: Backend Dev\n\n- TASK: Color & Theme system\n  owner: OPEN\n  status: TODO\n  notes: feature: F-008 — Color & Theme; depends_on: Properties panel (x/y/size/angle/alpha/anchor); roles: Frontend Dev, Designer
 
-- TASK: Properties panel (x/y/size/angle/alpha/anchor)
-  owner: OPEN
-  status: TODO
-  notes: feature: F-004 — Properties Panel; depends_on: Layers panel + grouping via Containers; roles: Frontend Dev
+<!-- Milestone M4 — Runtime & Preview -->\n\n- TASK: Runtime Loader for Phaser 3.90 (loadHUD)\n  owner: OPEN\n  status: TODO\n  notes: feature: F-011 — Runtime Loader for Phaser 3.90; depends_on: Importer + minor schema migrations; roles: Backend Dev\n\n- TASK: In-editor Live Preview & Validator\n  owner: OPEN\n  status: TODO\n  notes: feature: F-012 — Preview & Validation; depends_on: Runtime Loader for Phaser 3.90 (loadHUD), Color & Theme system; roles: Frontend Dev, QA
 
-<!-- Milestone M2 — Assets, Text & Panels -->
-
-- TASK: Asset Manager (images/atlases) + drag to canvas
-  owner: OPEN
-  status: TODO
-  notes: feature: F-006 — Image & Atlas Support; depends_on: Properties panel (x/y/size/angle/alpha/anchor); roles: Frontend Dev
-
-- TASK: WebFont + BitmapText support
-  owner: OPEN
-  status: TODO
-  notes: feature: F-005 — Text Support (WebFont + BitmapText); depends_on: Properties panel (x/y/size/angle/alpha/anchor); roles: Frontend Dev
-
-- TASK: Nine-slice Panels
-  owner: OPEN
-  status: TODO
-  notes: feature: F-007 — Panels (Nine-slice); depends_on: Asset Manager (images/atlases) + drag to canvas; roles: Frontend Dev
-
-<!-- Milestone M3 — Export / Import / Themes -->
-
-- TASK: Custom HUD JSON schema + exporter (placeholders)
-  owner: OPEN
-  status: TODO
-  notes: feature: F-009 — Custom HUD Schema & Exporter; depends_on: WebFont + BitmapText support, Asset Manager (images/atlases) + drag to canvas, Nine-slice Panels; roles: Backend Dev, Frontend Dev
-
-- TASK: Importer + minor schema migrations
-  owner: OPEN
-  status: TODO
-  notes: feature: F-010 — Importer & Versioning; depends_on: Custom HUD JSON schema + exporter (placeholders); roles: Backend Dev
-
-- TASK: Color & Theme system
-  owner: OPEN
-  status: TODO
-  notes: feature: F-008 — Color & Theme; depends_on: Properties panel (x/y/size/angle/alpha/anchor); roles: Frontend Dev, Designer
-
-<!-- Milestone M4 — Runtime & Preview -->
-
-- TASK: Runtime Loader for Phaser 3.90 (loadHUD)
-  owner: OPEN
-  status: TODO
-  notes: feature: F-011 — Runtime Loader for Phaser 3.90; depends_on: Importer + minor schema migrations; roles: Backend Dev
-
-- TASK: In-editor Live Preview & Validator
-  owner: OPEN
-  status: TODO
-  notes: feature: F-012 — Preview & Validation; depends_on: Runtime Loader for Phaser 3.90 (loadHUD), Color & Theme system; roles: Frontend Dev, QA
-
-<!-- Milestone M5 — Polish, Templates & Docs -->
-
-- TASK: Starter HUD templates (Score, Health, MiniMap frame)
-  owner: OPEN
-  status: TODO
-  notes: feature: F-009 — Custom HUD Schema & Exporter; depends_on: In-editor Live Preview & Validator; roles: Designer, Frontend Dev
-
-- TASK: Docs: Editor User Guide + Runtime API
-  owner: OPEN
-  status: TODO
-  notes: feature: F-011 — Runtime Loader for Phaser 3.90; depends_on: Runtime Loader for Phaser 3.90 (loadHUD); roles: Tech Writer, Frontend Dev, Backend Dev
-
+<!-- Milestone M5 — Polish, Templates & Docs -->\n\n- TASK: Starter HUD templates (Score, Health, MiniMap frame)\n  owner: OPEN\n  status: TODO\n  notes: feature: F-009 — Custom HUD Schema & Exporter; depends_on: In-editor Live Preview & Validator; roles: Designer, Frontend Dev\n\n- TASK: Docs: Editor User Guide + Runtime API\n  owner: OPEN\n  status: TODO\n  notes: feature: F-011 — Runtime Loader for Phaser 3.90; depends_on: Runtime Loader for Phaser 3.90 (loadHUD); roles: Tech Writer, Frontend Dev, Backend Dev\n\n
